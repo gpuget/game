@@ -18,4 +18,9 @@ public interface Game {
      * Handles the end.
      */
     void end();
+
+    /**
+     * Resets the game.
+     */
+    void reset();
 }
