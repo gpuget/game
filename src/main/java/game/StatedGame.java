@@ -5,10 +5,12 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * The type Stated game.
  */
-public abstract class StatedGame extends Game {
+public abstract class StatedGame {
     private State state = State.INITIALISED;
 
-    @Override
+    /**
+     * Starts the game.
+     */
     public final void start() {
         System.out.println("Game starting...");
         setState(State.STARTED);
@@ -24,16 +26,13 @@ public abstract class StatedGame extends Game {
         end();
     }
 
-    @Override
+    /**
+     * Resets the game.
+     */
     public final void reset() {
         setState(State.INITIALISED);
         doReset();
     }
-
-    /**
-     * Performs the specific reset.
-     */
-    protected abstract void doReset();
 
     /**
      * Performs the specific start.
@@ -41,11 +40,26 @@ public abstract class StatedGame extends Game {
     protected abstract void doStart();
 
     /**
+     * Performs the specific reset.
+     */
+    protected abstract void doReset();
+
+    /**
      * Gets the game over condition.
      *
      * @return {@code true} if game is over, {@code false} otherwise
      */
     protected abstract boolean over();
+
+    /**
+     * Performs game resolution.
+     */
+    protected abstract void resolve();
+
+    /**
+     * Ends the game.
+     */
+    protected abstract void end();
 
     /**
      * Gets the game state.
