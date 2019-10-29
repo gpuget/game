@@ -108,6 +108,7 @@ public abstract class RoundedGame<T extends Player> extends StatedGame implement
      * @param currentRound the current round
      */
     public void setCurrentRound(int currentRound) {
+        checkArgument(currentRound >= 0);
         this.currentRound = currentRound;
     }
 }
