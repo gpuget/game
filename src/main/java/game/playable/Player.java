@@ -6,13 +6,8 @@ package game.playable;
 public abstract class Player {
     private final String name;
 
-    /**
-     * Instantiates a new named Player.
-     *
-     * @param name the name
-     */
-    protected Player(String name) {
-        this.name = name;
+    protected Player(Builder<?> builder) {
+        this.name = builder.name;
     }
 
     @Override
@@ -38,4 +33,14 @@ public abstract class Player {
      * Resets the player.
      */
     public abstract void reset();
+
+    protected static abstract class Builder<T extends Player> {
+        protected final String name;
+
+        protected Builder(String name) {
+            this.name = name;
+        }
+
+        public abstract T build();
+    }
 }

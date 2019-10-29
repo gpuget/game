@@ -19,7 +19,7 @@ public class PSSPlayer extends Player {
     private int score = 0;
 
     private PSSPlayer(Builder builder) {
-        super(builder.name);
+        super(builder);
         this.strategy = builder.strategy;
     }
 
@@ -121,32 +121,18 @@ public class PSSPlayer extends Player {
         return builder(DEFAULT_NAME).build();
     }
 
-    /**
-     * Builder.
-     */
-    public static class Builder {
-        private final String name;
+    public static class Builder extends Player.Builder<PSSPlayer> {
         private PlayerStrategy<PSSAction> strategy = PSSSimpleStrategy.RANDOM;
 
-        private Builder(String name) {
-            this.name = name;
+        protected Builder(String name) {
+            super(name);
         }
 
-        /**
-         * Build pss player.
-         *
-         * @return the pss player
-         */
+        @Override
         public PSSPlayer build() {
             return new PSSPlayer(this);
         }
 
-        /**
-         * Strategy builder.
-         *
-         * @param strategy the strategy
-         * @return the builder
-         */
         public Builder strategy(PlayerStrategy<PSSAction> strategy) {
             this.strategy = strategy;
             return this;
