@@ -5,7 +5,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * The type Stated game.
  */
-public abstract class StatedGame implements Game {
+public abstract class StatedGame extends Game {
     private State state = State.INITIALISED;
 
     @Override

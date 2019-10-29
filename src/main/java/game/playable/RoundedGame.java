@@ -1,7 +1,5 @@
 package game.playable;
 
-import game.StatedGame;
-
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -11,8 +9,7 @@ import static com.google.common.base.Preconditions.checkArgument;
  *
  * @param <T> the type of player
  */
-public abstract class RoundedGame<T extends Player> extends StatedGame implements PlayableGame<T> {
-    private final List<T> players;
+public abstract class RoundedGame<T extends Player> extends PlayableGame<T> {
     private final int bestOf;
     private int currentRound = 0;
 
@@ -22,10 +19,9 @@ public abstract class RoundedGame<T extends Player> extends StatedGame implement
      * @param players the players
      * @param bestOf  the best of
      */
-    public RoundedGame(List<T> players, int bestOf) {
-        this.players = players;
+    protected RoundedGame(List<T> players, int bestOf) {
+        super(players);
         this.bestOf = bestOf;
-        checkArgument(players != null);
         checkArgument(this.bestOf > 0);
     }
 
@@ -52,7 +48,7 @@ public abstract class RoundedGame<T extends Player> extends StatedGame implement
     @Override
     protected void doReset() {
         this.currentRound = 0;
-        this.players.forEach(Player::reset);
+        players().forEach(Player::reset);
     }
 
     @Override
@@ -63,21 +59,6 @@ public abstract class RoundedGame<T extends Player> extends StatedGame implement
     @Override
     public boolean over() {
         return this.currentRound > this.bestOf;
-    }
-
-    @Override
-    public List<T> players() {
-        return this.players;
-    }
-
-    /**
-     * Gets the player in the list.
-     *
-     * @param index the index
-     * @return the t
-     */
-    public T player(int index) {
-        return players().get(index);
     }
 
     /**

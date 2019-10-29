@@ -1,26 +1,26 @@
 package game;
 
 /**
- * The interface Game.
+ * The type Game.
  */
-public interface Game {
+public abstract class Game {
     /**
-     * Starts the game.
+     * Start.
      */
-    void start();
+    public abstract void start();
 
     /**
-     * Resolve the game.
+     * Resolve.
      */
-    void resolve();
+    public abstract void resolve();
 
     /**
-     * Handles the end.
+     * End.
      */
-    void end();
+    public abstract void end();
 
     /**
-     * Resets the game.
+     * Reset.
      */
-    void reset();
+    public abstract void reset();
 }
