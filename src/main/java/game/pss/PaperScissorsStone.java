@@ -27,7 +27,7 @@ public class PaperScissorsStone extends RoundedGame<PSSPlayer> {
     }
 
     @Override
-    public Optional<PSSPlayer> gameWinner() {
+    public Optional<PSSPlayer> winner() {
         return decideWinner(PSSPlayer::score, Integer::compareTo);
     }
 

@@ -1,6 +1,6 @@
-package game.pss.strategy;
+package game.pss.player;
 
-import game.pss.player.PSSPlayer;
+import game.pss.strategy.PSSAction;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 

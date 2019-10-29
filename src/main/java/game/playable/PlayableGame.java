@@ -19,19 +19,9 @@ public interface PlayableGame<T extends Player> extends Game {
     List<T> players();
 
     /**
-     * Gets the player in the list.
-     *
-     * @param index the index
-     * @return the t
-     */
-    default T player(int index) {
-        return players().get(index);
-    }
-
-    /**
      * Gets the game winner.
      *
-     * @return the game winner, unnamedPlayer optional if draw game
+     * @return the game winner, empty optional if draw game
      */
-    Optional<T> gameWinner();
+    Optional<T> winner();
 }

@@ -1,8 +1,6 @@
 package game.playable;
 
 import game.StatedGame;
-import game.playable.PlayableGame;
-import game.playable.Player;
 
 import java.util.List;
 
@@ -48,7 +46,7 @@ public abstract class RoundedGame<T extends Player> extends StatedGame implement
      * @return the string
      */
     protected String endMessage() {
-        return gameWinner().map(p -> p + " is the winner.").orElse("DRAW");
+        return winner().map(p -> p + " is the winner.").orElse("DRAW");
     }
 
     @Override
@@ -70,6 +68,16 @@ public abstract class RoundedGame<T extends Player> extends StatedGame implement
     @Override
     public List<T> players() {
         return this.players;
+    }
+
+    /**
+     * Gets the player in the list.
+     *
+     * @param index the index
+     * @return the t
+     */
+    public T player(int index) {
+        return players().get(index);
     }
 
     /**

@@ -1,6 +1,5 @@
-package game.pss.player;
+package game.pss.strategy;
 
-import game.pss.strategy.PSSAction;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -79,18 +79,18 @@ public class PaperScissorsStoneTest {
     @Test
     public void playerOneWins() {
         this.game.playerOne().gain();
-        assertThat(this.game.gameWinner()).isNotEmpty().hasValue(this.game.playerOne());
+        assertThat(this.game.winner()).isNotEmpty().hasValue(this.game.playerOne());
     }
 
     @Test
     public void playerOneLoses() {
         this.game.playerTwo().gain();
-        assertThat(this.game.gameWinner()).isNotEmpty().hasValue(this.game.playerTwo());
+        assertThat(this.game.winner()).isNotEmpty().hasValue(this.game.playerTwo());
     }
 
     @Test
     public void draw() {
-        assertThat(this.game.gameWinner()).isEmpty();
+        assertThat(this.game.winner()).isEmpty();
     }
 
     @Test
