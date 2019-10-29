@@ -1,6 +1,7 @@
 package game.playable;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
@@ -72,6 +73,13 @@ public abstract class RoundedGame<T extends Player> extends PlayableGame<T> {
      * Resolves the round.
      */
     public abstract void resolveRound();
+
+    /**
+     * Gets the round winner.
+     *
+     * @return the round winner, empty optional if draw round
+     */
+    public abstract Optional<T> roundWinner();
 
     /**
      * Gets the the best of.

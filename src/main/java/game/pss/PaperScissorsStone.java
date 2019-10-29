@@ -41,12 +41,18 @@ public class PaperScissorsStone extends RoundedGame<PSSPlayer> {
         }
         return Optional.ofNullable(winner);
     }
+
+    @Override
+    public boolean over() {
+        return super.over() || players().stream().map(PSSPlayer::score).anyMatch(score -> score == minRoundsToWin());
+    }
+
     @Override
     public void resolveRound() {
         System.out.println("ROUND " + currentRound());
         players().forEach(PSSPlayer::play);
 
-        Optional<PSSPlayer> roundWinner = getRoundWinner();
+        Optional<PSSPlayer> roundWinner = roundWinner();
         String message;
         if (roundWinner.isPresent()) {
             PSSPlayer player = roundWinner.get();
@@ -60,8 +66,8 @@ public class PaperScissorsStone extends RoundedGame<PSSPlayer> {
     }
 
     @Override
-    public boolean over() {
-        return super.over() || players().stream().map(PSSPlayer::score).anyMatch(score -> score == minRoundsToWin());
+    public Optional<PSSPlayer> roundWinner() {
+        return decideWinner(PSSPlayer::selectedAction, PSSAction::usedAgainst);
     }
 
     /**
@@ -80,10 +86,6 @@ public class PaperScissorsStone extends RoundedGame<PSSPlayer> {
      */
     public PSSPlayer playerTwo() {
         return player(1);
-    }
-
-    private Optional<PSSPlayer> getRoundWinner() {
-        return decideWinner(PSSPlayer::selectedAction, PSSAction::usedAgainst);
     }
 
     /**
