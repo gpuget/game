@@ -5,6 +5,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class PSSPlayerTest {
     private final PSSPlayer player = PSSPlayer.unnamedPlayer();
@@ -36,5 +37,11 @@ class PSSPlayerTest {
         assertThat(this.player.score()).isZero();
         this.player.gain(value);
         assertThat(this.player.score()).isEqualTo(value);
+    }
+
+    @Test
+    void gainNegative() {
+        assertThat(this.player.score()).isZero();
+        assertThrows(IllegalArgumentException.class, () -> this.player.gain(-2));
     }
 }
