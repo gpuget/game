@@ -1,4 +1,8 @@
-package game;
+package game.playable;
+
+import game.StatedGame;
+import game.playable.PlayableGame;
+import game.playable.Player;
 
 import java.util.List;
 

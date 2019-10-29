@@ -1,4 +1,6 @@
-package game;
+package game.playable;
+
+import game.Game;
 
 import java.util.List;
 import java.util.Optional;
