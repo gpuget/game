@@ -15,18 +15,26 @@ import java.util.stream.IntStream;
 public final class Board {
   private static final Pattern PATTERN = Pattern.compile("^[A-J]([1-9]|10)[LRUD]$");
   private static final int SIZE = 10;
-  private final Set<Ship> ships = new HashSet<>();
+  private final Set<Ship> ships;
+
+  private Board(Set<Ship> ships) {
+    this.ships = new HashSet<>(ships);
+  }
 
   Board() {
-
+    this.ships = new HashSet<>();
   }
 
   public static Board empty() {
     return new Board();
   }
 
+  public static Board with(Set<Ship> ships) {
+    return new Board(ships);
+  }
+
   public static List<Spot> spots(String code, int number) {
-    if (checkLimit(number )&& PATTERN.matcher(code).matches()) {
+    if (checkLimit(number) && PATTERN.matcher(code).matches()) {
       char row = code.charAt(0);
       String col = code.substring(1, code.length() - 1);
       char orientation = code.charAt(code.length() - 1);
