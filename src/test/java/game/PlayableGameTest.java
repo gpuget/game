@@ -10,19 +10,19 @@ import org.junit.jupiter.api.Test;
 
 class PlayableGameTest {
   @Test
-  public void givenEmptyPlayersList_whenCreate_thenOk() {
+  void givenEmptyPlayersList_whenCreate_thenOk() {
     assertThat(new MockPlayableGame(Collections.emptyList(), 1)).isNotNull();
   }
 
   @Test
-  public void givenTooManyPlayers_whenCreate_thenKo() {
+  void givenTooManyPlayers_whenCreate_thenKo() {
     assertThatThrownBy(() -> new MockPlayableGame(List.of(new Object(), new Object()), 1))
         .isInstanceOf(IllegalArgumentException.class)
         .hasMessage("Too many players !");
   }
 
   @Test
-  public void givenOnePlayerInOnePlayerGame_whenNewPlayer_thenKo() {
+  void givenOnePlayerInOnePlayerGame_whenNewPlayer_thenKo() {
     PlayableGame game = new MockPlayableGame(List.of(new Object()), 1);
     assertThatThrownBy(game::newPlayer)
         .isInstanceOf(IllegalArgumentException.class)
@@ -30,11 +30,22 @@ class PlayableGameTest {
   }
 
   @Test
-  public void whenNewPlayer_thenPlayersListIncreased() {
+  void whenNewPlayer_thenPlayersListIncreased() {
     PlayableGame game = new MockPlayableGame(new LinkedList(), 1);
     Player player = game.newPlayer();
     assertThat(game.getPlayers()).hasSize(1);
     assertThat(game.getPlayers().get(0)).isEqualTo(player);
+  }
+
+  @Test
+  void whenInit_thenMaxPlayersAreCreatedAndPlayersListIsUnmodifiable() {
+    int max = 1;
+    PlayableGame game = new MockPlayableGame(new LinkedList(), max);
+
+    game.doInit();
+
+    assertThat(game.getPlayers()).hasSize(max);
+    assertThatThrownBy(() -> game.getPlayers().add(new Object())).isInstanceOf(UnsupportedOperationException.class);
   }
 
   private static class MockPlayableGame extends PlayableGame {
@@ -43,13 +54,8 @@ class PlayableGameTest {
     }
 
     @Override
-    protected boolean doInit() {
-      return false;
-    }
-
-    @Override
     protected Player createPlayer() {
-      return null;
+      return new Player("bob") {};
     }
   }
 }

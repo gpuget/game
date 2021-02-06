@@ -2,9 +2,10 @@ package game;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public abstract class PlayableGame<P extends Player> extends Game {
-  private final List<P> players;
+  private List<P> players;
   private final int maxPlayers;
 
   protected PlayableGame(List<P> players, int maxPlayers) {
@@ -35,6 +36,13 @@ public abstract class PlayableGame<P extends Player> extends Game {
   }
 
   protected abstract P createPlayer();
+
+  @Override
+  protected boolean doInit() {
+    IntStream.range(0, this.maxPlayers).forEach(i -> newPlayer());
+    this.players = List.copyOf(this.players); // Set immutable
+    return true;
+  }
 
   @Override
   public boolean equals(Object o) {
