@@ -28,7 +28,7 @@ public class Battleship extends PlayableGame<BattleshipPlayer> {
   }
 
   private Board createBoard() {
-    Board board = new Board();
+    Board board = Board.empty();
     Arrays.stream(ShipType.values())
         .map(this::createShip)
         .forEach(board::places);
@@ -36,7 +36,7 @@ public class Battleship extends PlayableGame<BattleshipPlayer> {
   }
 
   private Ship createShip(ShipType type) {
-    List<Spot> spots = Board.spots(SCANNER.nextLine());
+    List<Spot> spots = Board.spots(SCANNER.nextLine(), type.getSize());
     return new Ship(type, spots);
   }
 }

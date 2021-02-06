@@ -8,6 +8,9 @@ public class Ship {
   private final List<Spot> spots;
 
   public Ship(ShipType type, List<Spot> spots) {
+    if (spots == null || spots.isEmpty()) {
+      throw new IllegalArgumentException("No spot for ship !");
+    }
     this.type = type;
     this.spots = List.copyOf(spots);
   }
