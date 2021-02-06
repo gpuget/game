@@ -15,6 +15,11 @@ public class Battleship extends PlayableGame<BattleshipPlayer> {
   @Override
   protected BattleshipPlayer createPlayer() {
     String playerName = DEFAULT_NAME_PLAYER + (getPlayers().size() + 1);
-    return new BattleshipPlayer(playerName);
+    Board board = createBoard();
+    return new BattleshipPlayer(playerName, board);
+  }
+
+  public Board createBoard() {
+    return null;
   }
 }
