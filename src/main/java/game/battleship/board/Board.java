@@ -83,7 +83,7 @@ public final class Board {
   private boolean alreadyOnBoard(Ship ship) {
     return this.ships.stream()
         .anyMatch(s -> s.getType() == ship.getType() ||
-            s.getSpots().stream().noneMatch(spot -> ship.getSpots().contains(spot)));
+            s.getSpots().stream().anyMatch(spot -> ship.getSpots().contains(spot)));
   }
 
   public Set<Ship> getShips() {

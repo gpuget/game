@@ -1,11 +1,30 @@
 package game.battleship.board;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import game.battleship.exceptions.ShipAlreadyPlacedException;
+import game.battleship.ship.Ship;
+import game.battleship.ship.ShipType;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class BoardTest {
+  private static final Ship CARRIER = new Ship(ShipType.CARRIER, List.of(
+      new Spot(0, 0),
+      new Spot(1, 0),
+      new Spot(2, 0),
+      new Spot(3, 0),
+      new Spot(4, 0)
+  ));
+  private static final Ship DESTROYER = new Ship(ShipType.DESTROYER, List.of(
+      new Spot(8, 0),
+      new Spot(7, 0),
+      new Spot(6, 0),
+      new Spot(5, 0),
+      new Spot(4, 0)
+  ));
+
   @Test
   void empty() {
     assertThat(Board.empty()).isEqualTo(new Board());
@@ -70,5 +89,26 @@ class BoardTest {
     List<Spot> spots = Board.spots("A1L", 3);
 
     assertThat(spots).isEmpty();
+  }
+
+  @Test
+  void givenEmptyBoard_whenPlacesShip_thenOk() {
+    assertThat(Board.empty().places(CARRIER).getShips()).hasSize(1);
+  }
+
+  @Test
+  void givenBoardWithCarrier_whenPlacesCarrier_thenKo() {
+    Board board = Board.empty().places(CARRIER);
+
+    assertThatThrownBy(() -> board.places(CARRIER))
+        .isInstanceOf(ShipAlreadyPlacedException.class);
+  }
+
+  @Test
+  void givenBoardWithCarrier_whenPlacesDestroyerOnSameSpot_thenKo() {
+    Board board = Board.empty().places(CARRIER);
+
+    assertThatThrownBy(() -> board.places(DESTROYER))
+        .isInstanceOf(ShipAlreadyPlacedException.class);
   }
 }
