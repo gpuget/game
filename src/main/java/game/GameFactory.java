@@ -1,9 +1,10 @@
 package game;
 
+import game.battleship.Battleship;
 import java.util.function.Supplier;
 
 public enum GameFactory {
-  ;
+  BATTLESHIP(Battleship::new);
 
   public final Supplier<Game> gameSupplier;
 
