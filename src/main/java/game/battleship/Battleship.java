@@ -1,7 +1,11 @@
 package game.battleship;
 
 import game.PlayableGame;
+import game.battleship.board.Board;
+import game.battleship.board.Ship;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.Set;
 
 public class Battleship extends PlayableGame<BattleshipPlayer> {
   static final String NAME = "BATTLESHIP";
@@ -19,7 +23,11 @@ public class Battleship extends PlayableGame<BattleshipPlayer> {
     return new BattleshipPlayer(playerName, board);
   }
 
-  public Board createBoard() {
-    return null;
+  private Board createBoard() {
+    return Board.places(ships());
+  }
+
+  private Set<Ship> ships() {
+    return Collections.emptySet();
   }
 }
