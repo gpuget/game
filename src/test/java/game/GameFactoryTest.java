@@ -2,6 +2,7 @@ package game;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import game.battleship.Battleship;
 import org.junit.jupiter.api.Test;
 
 class GameFactoryTest {
@@ -9,6 +10,6 @@ class GameFactoryTest {
   void create_battleship() {
     Game game = GameFactory.BATTLESHIP.create();
     assertThat(game).isNotNull();
-    assertThat(game.isCreated()).isTrue();
+    assertThat(game).isInstanceOf(Battleship.class);
   }
 }
