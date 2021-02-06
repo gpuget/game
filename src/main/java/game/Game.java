@@ -1,5 +1,7 @@
 package game;
 
+import java.util.Objects;
+
 public abstract class Game {
   private State state;
 
@@ -28,6 +30,23 @@ public abstract class Game {
   }
 
   protected abstract boolean doInit();
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Game game = (Game) o;
+    return state == game.state;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(state);
+  }
 
   enum State {
     CREATED, INITIALIZED, STARTED
