@@ -9,11 +9,6 @@ class GameFactoryTest {
   void create_battleship() {
     Game game = GameFactory.BATTLESHIP.create();
     assertThat(game).isNotNull();
-  }
-
-  @Test
-  void game_is_created() {
-    Game game = GameFactory.BATTLESHIP.create();
     assertThat(game.isCreated()).isTrue();
   }
 }
