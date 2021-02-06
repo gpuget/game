@@ -38,9 +38,6 @@ public class Spot {
 
   @Override
   public String toString() {
-    return "Spot{" +
-        "row=" + row +
-        ", col=" + col +
-        '}';
+    return "" + ((char)('A' + row)) + (col + 1);
   }
 }

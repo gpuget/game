@@ -86,6 +86,10 @@ public final class Board {
             s.getSpots().stream().noneMatch(spot -> ship.getSpots().contains(spot)));
   }
 
+  public Set<Ship> getShips() {
+    return ships;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
