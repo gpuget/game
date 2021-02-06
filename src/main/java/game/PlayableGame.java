@@ -8,7 +8,8 @@ public abstract class PlayableGame<P extends Player> extends Game {
   private List<P> players;
   private final int maxPlayers;
 
-  protected PlayableGame(List<P> players, int maxPlayers) {
+  protected PlayableGame(String name, List<P> players, int maxPlayers) {
+    super(name);
     checkMax(players, maxPlayers);
     this.players = players;
     this.maxPlayers = maxPlayers;

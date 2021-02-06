@@ -3,13 +3,19 @@ package game;
 import java.util.Objects;
 
 public abstract class Game {
+  private static final String TITLE = "==[%s]==";
+  private final String name;
+  private final String title;
   private State state;
 
-  protected Game() {
+  protected Game(String name) {
+    this.name = name;
+    this.title = String.format(TITLE, this.name);
     this.state = State.CREATED;
   }
 
   public State init() {
+    System.out.println(this.title);
     boolean result = doInit();
     if (result) {
       this.state = State.INITIALIZED;
@@ -30,6 +36,10 @@ public abstract class Game {
   }
 
   protected abstract boolean doInit();
+
+  public String getName() {
+    return name;
+  }
 
   @Override
   public boolean equals(Object o) {

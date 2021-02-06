@@ -50,7 +50,7 @@ class PlayableGameTest {
 
   private static class MockPlayableGame extends PlayableGame {
     protected MockPlayableGame(List players, int maxPlayers) {
-      super(players, maxPlayers);
+      super("bob game", players, maxPlayers);
     }
 
     @Override

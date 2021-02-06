@@ -26,13 +26,13 @@ class GameTest {
   }
 
   private enum MockGame {
-    NORMAL(new Game() {
+    NORMAL(new Game("Normal game") {
       @Override
       protected boolean doInit() {
         return true;
       }
     }),
-    CANNOT_BE_INITIALIZED(new Game() {
+    CANNOT_BE_INITIALIZED(new Game("Cannot be initialized") {
 
       @Override
       protected boolean doInit() {
