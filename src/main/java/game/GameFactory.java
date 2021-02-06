@@ -11,10 +11,6 @@ public enum GameFactory {
     this.gameSupplier = gameSupplier;
   }
 
-  GameFactory() {
-    this.gameSupplier = () -> null;
-  }
-
   public Game create() {
     return this.gameSupplier.get();
   }
