@@ -2,6 +2,7 @@ package game.battleship;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import game.battleship.board.Board;
 import org.junit.jupiter.api.Test;
 
 class BattleshipTest {
@@ -21,7 +22,7 @@ class BattleshipTest {
 
     BattleshipPlayer player1 = battleship.createPlayer();
 
-    assertThat(player1).isEqualTo(new BattleshipPlayer("Player 1"));
+    assertThat(player1).isEqualTo(new BattleshipPlayer("Player 1", Board.empty()));
   }
 
   @Test
@@ -32,6 +33,6 @@ class BattleshipTest {
     BattleshipPlayer player2 = battleship.newPlayer();
 
     assertThat(battleship.getPlayers()).hasSize(2);
-    assertThat(battleship.getPlayers().get(1)).isEqualTo(new BattleshipPlayer("Player 2"));
+    assertThat(battleship.getPlayers().get(1)).isEqualTo(new BattleshipPlayer("Player 2", Board.empty()));
   }
 }
