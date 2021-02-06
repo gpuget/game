@@ -12,6 +12,7 @@ class BattleshipTest {
     assertThat(battleship).isNotNull();
     assertThat(battleship.getPlayers()).isEmpty();
     assertThat(battleship.getMaxPlayers()).isEqualTo(2);
+    assertThat(battleship.getName()).isEqualTo(Battleship.NAME);
   }
 
   @Test
