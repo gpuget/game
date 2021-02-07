@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public final class Board {
-  private static final Pattern PATTERN = Pattern.compile("^[A-J]([1-9]|10)[LRUD]$");
   private static final int SIZE = 10;
 
   private final Set<Ship> ships;
@@ -38,44 +37,43 @@ public final class Board {
   }
 
   public static List<Spot> spots(String code, int number) {
-    if (checkLimit(number) && PATTERN.matcher(code).matches()) {
-      char row = code.charAt(0);
-      String col = code.substring(1, code.length() - 1);
-      char orientation = code.charAt(code.length() - 1);
-      return spots(row - 'A', Integer.parseInt(col) - 1, Orientation.valueOf(orientation), number);
+    if (checkLimit(number)) {
+      return spots(Position.decode(code), number);
     }
     return Collections.emptyList();
   }
 
-  private static List<Spot> spots(int row, int col, Orientation orientation, int number) {
-    IntUnaryOperator rowShift;
-    IntUnaryOperator colShift;
-    switch (orientation) {
-      case LEFT:
-        rowShift = value -> row;
-        colShift = value -> col - value;
-        break;
-      case RIGHT:
-        rowShift = value -> row;
-        colShift = value -> col + value;
-        break;
-      case UP:
-        rowShift = value -> row - value;
-        colShift = value -> col;
-        break;
-      case DOWN:
-        rowShift = value -> row + value;
-        colShift = value -> col;
-        break;
-      default:
-        rowShift = value -> row;
-        colShift = value -> col;
-    }
-    if (checkLimit(rowShift.applyAsInt(number)) && checkLimit(colShift.applyAsInt(number))) {
-      return IntStream.range(0, number)
-          .mapToObj(
-              shift -> Spot.occupied(rowShift.applyAsInt(shift), colShift.applyAsInt(shift)))
-          .collect(Collectors.toList());
+  private static List<Spot> spots(Position position, int number) {
+    if (position.isValid()) {
+      IntUnaryOperator rowShift;
+      IntUnaryOperator colShift;
+      switch (position.getOrientation()) {
+        case LEFT:
+          rowShift = value -> position.getRow();
+          colShift = value -> position.getCol() - value;
+          break;
+        case RIGHT:
+          rowShift = value -> position.getRow();
+          colShift = value -> position.getCol() + value;
+          break;
+        case UP:
+          rowShift = value -> position.getRow() - value;
+          colShift = value -> position.getCol();
+          break;
+        case DOWN:
+          rowShift = value -> position.getRow() + value;
+          colShift = value -> position.getCol();
+          break;
+        default:
+          rowShift = value -> position.getRow();
+          colShift = value -> position.getCol();
+      }
+      if (checkLimit(rowShift.applyAsInt(number)) && checkLimit(colShift.applyAsInt(number))) {
+        return IntStream.range(0, number)
+            .mapToObj(
+                shift -> Spot.occupied(rowShift.applyAsInt(shift), colShift.applyAsInt(shift)))
+            .collect(Collectors.toList());
+      }
     }
     return Collections.emptyList();
   }
