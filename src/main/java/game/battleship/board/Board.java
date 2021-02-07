@@ -17,7 +17,7 @@ public final class Board {
   private static final int SIZE = 10;
 
   private final Set<Ship> ships;
-  private final Screen mainScreen;
+  private Screen mainScreen;
 
   private Board(Set<Ship> ships) {
     this.ships = new HashSet<>(ships);
@@ -90,6 +90,7 @@ public final class Board {
     }
 
     this.ships.add(ship);
+    this.mainScreen.update(this.ships);
     return this;
   }
 
@@ -118,5 +119,10 @@ public final class Board {
   @Override
   public int hashCode() {
     return Objects.hash(ships);
+  }
+
+  @Override
+  public String toString() {
+    return mainScreen.toString();
   }
 }
