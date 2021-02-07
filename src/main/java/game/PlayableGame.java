@@ -1,31 +1,51 @@
 package game;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
-public abstract class PlayableGame<P extends Player> extends Game {
-  private List<P> players;
+public abstract class PlayableGame<P extends Player> extends GenericGame {
   private final int maxPlayers;
+  private List<P> players;
 
-  protected PlayableGame(String name, List<P> players, int maxPlayers) {
+  protected PlayableGame(String name, List<P> players) {
     super(name);
-    checkMax(players, maxPlayers);
-    this.players = players;
+    checkArgument(players.size() > 0, "At least 1 player");
+    this.players = List.copyOf(players);
+    this.maxPlayers = players.size();
+  }
+
+  protected PlayableGame(String name, int maxPlayers) {
+    super(name);
+    checkArgument(maxPlayers > 0, "At least 1 player");
+    this.players = new ArrayList<>(maxPlayers);
     this.maxPlayers = maxPlayers;
   }
 
-  private static void checkMax(List<? extends Player> players, int limit) {
-    if (players.size() > limit) {
+  public P newPlayer() {
+    checkMaxPlayer();
+    P player = createPlayer();
+    this.players.add(player);
+    if (this.players.size() == this.maxPlayers) {
+      this.players = List.copyOf(players); // Set immutable
+    }
+    return player;
+  }
+
+  private void checkMaxPlayer() {
+    if (this.players.size() > this.maxPlayers - 1) {
       throw new IllegalArgumentException("Too many players !");
     }
   }
 
-  public P newPlayer() {
-    checkMax(this.players, this.maxPlayers - 1);
-    P player = createPlayer();
-    this.players.add(player);
-    return player;
+  @Override
+  protected boolean doInit() {
+    IntStream.range(0, this.maxPlayers).forEach(i -> newPlayer());
+    this.players = List.copyOf(this.players); // Set immutable
+    return true;
   }
 
   public List<P> getPlayers() {
@@ -34,15 +54,6 @@ public abstract class PlayableGame<P extends Player> extends Game {
 
   public int getMaxPlayers() {
     return maxPlayers;
-  }
-
-  protected abstract P createPlayer();
-
-  @Override
-  protected boolean doInit() {
-    IntStream.range(0, this.maxPlayers).forEach(i -> newPlayer());
-    this.players = List.copyOf(this.players); // Set immutable
-    return true;
   }
 
   @Override
@@ -64,4 +75,6 @@ public abstract class PlayableGame<P extends Player> extends Game {
   public int hashCode() {
     return Objects.hash(super.hashCode(), players);
   }
+
+  protected abstract P createPlayer();
 }

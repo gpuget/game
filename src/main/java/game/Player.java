@@ -2,7 +2,7 @@ package game;
 
 import java.util.Objects;
 
-public abstract class Player {
+public class Player {
   private final String name;
 
   protected Player(String name) {
