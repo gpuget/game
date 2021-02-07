@@ -5,10 +5,24 @@ import java.util.Objects;
 public class Spot {
   private final int row;
   private final int col;
+  private char state;
 
-  public Spot(int row, int col) {
+  private Spot(int row, int col, char state) {
     this.row = row;
     this.col = col;
+    this.state = state;
+  }
+
+  public static Spot occupied(int row, int col) {
+    return new Spot(row, col, 'O');
+  }
+
+  public static Spot free(int row, int col) {
+    return new Spot(row, col, '.');
+  }
+
+  public boolean isOccupied() {
+    return this.state == 'O';
   }
 
   public int getRow() {
@@ -17,6 +31,10 @@ public class Spot {
 
   public int getCol() {
     return col;
+  }
+
+  public char getState() {
+    return state;
   }
 
   @Override
@@ -28,16 +46,16 @@ public class Spot {
       return false;
     }
     Spot spot = (Spot) o;
-    return row == spot.row && col == spot.col;
+    return row == spot.row && col == spot.col && state == spot.state;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(row, col);
+    return Objects.hash(row, col, state);
   }
 
   @Override
   public String toString() {
-    return "" + ((char)('A' + row)) + (col + 1);
+    return "" + state;
   }
 }
