@@ -16,31 +16,31 @@ import org.junit.jupiter.api.Test;
 class BattleshipTest {
   private static final Set<Ship> SHIPS = Set.of(
       new Ship(ShipType.CARRIER, List.of(
-          new Spot(0, 0),
-          new Spot(1, 0),
-          new Spot(2, 0),
-          new Spot(3, 0),
-          new Spot(4, 0)
+          Spot.occupied(0, 0),
+          Spot.occupied(1, 0),
+          Spot.occupied(2, 0),
+          Spot.occupied(3, 0),
+          Spot.occupied(4, 0)
       )),
       new Ship(ShipType.BATTLESHIP, List.of(
-          new Spot(0, 1),
-          new Spot(1, 1),
-          new Spot(2, 1),
-          new Spot(3, 1)
+          Spot.occupied(0, 1),
+          Spot.occupied(1, 1),
+          Spot.occupied(2, 1),
+          Spot.occupied(3, 1)
       )),
       new Ship(ShipType.CRUISER, List.of(
-          new Spot(0, 2),
-          new Spot(1, 2),
-          new Spot(2, 2)
+          Spot.occupied(0, 2),
+          Spot.occupied(1, 2),
+          Spot.occupied(2, 2)
       )),
       new Ship(ShipType.DESTROYER, List.of(
-          new Spot(0, 3),
-          new Spot(1, 3),
-          new Spot(2, 3)
+          Spot.occupied(0, 3),
+          Spot.occupied(1, 3),
+          Spot.occupied(2, 3)
       )),
       new Ship(ShipType.PATROL_BOAT, List.of(
-          new Spot(0, 4),
-          new Spot(1, 4)
+          Spot.occupied(0, 4),
+          Spot.occupied(1, 4)
       ))
   );
 

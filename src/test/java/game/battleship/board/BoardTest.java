@@ -11,18 +11,18 @@ import org.junit.jupiter.api.Test;
 
 class BoardTest {
   private static final Ship CARRIER = new Ship(ShipType.CARRIER, List.of(
-      new Spot(0, 0),
-      new Spot(1, 0),
-      new Spot(2, 0),
-      new Spot(3, 0),
-      new Spot(4, 0)
+      Spot.occupied(0, 0),
+      Spot.occupied(1, 0),
+      Spot.occupied(2, 0),
+      Spot.occupied(3, 0),
+      Spot.occupied(4, 0)
   ));
   private static final Ship DESTROYER = new Ship(ShipType.DESTROYER, List.of(
-      new Spot(8, 0),
-      new Spot(7, 0),
-      new Spot(6, 0),
-      new Spot(5, 0),
-      new Spot(4, 0)
+      Spot.occupied(8, 0),
+      Spot.occupied(7, 0),
+      Spot.occupied(6, 0),
+      Spot.occupied(5, 0),
+      Spot.occupied(4, 0)
   ));
 
   @Test
@@ -53,35 +53,35 @@ class BoardTest {
     List<Spot> spots = Board.spots("A1D", number);
 
     assertThat(spots).hasSize(number);
-    assertThat(spots.get(0)).isEqualTo(new Spot(0, 0));
+    assertThat(spots.get(0)).isEqualTo(Spot.occupied(0, 0));
   }
 
   @Test
   void givenNumberAndLeft_whenCreateSpots_thenOk() {
     List<Spot> spots = Board.spots("J10L", 3);
     assertThat(spots)
-        .isEqualTo(List.of(new Spot(9, 9), new Spot(9, 8), new Spot(9, 7)));
+        .isEqualTo(List.of(Spot.occupied(9, 9), Spot.occupied(9, 8), Spot.occupied(9, 7)));
   }
 
   @Test
   void givenNumberAndRight_whenCreateSpots_thenOk() {
     List<Spot> spots = Board.spots("A1R", 3);
     assertThat(spots)
-        .isEqualTo(List.of(new Spot(0, 0), new Spot(0, 1), new Spot(0, 2)));
+        .isEqualTo(List.of(Spot.occupied(0, 0), Spot.occupied(0, 1), Spot.occupied(0, 2)));
   }
 
   @Test
   void givenNumberAndUp_whenCreateSpots_thenOk() {
     List<Spot> spots = Board.spots("J10U", 3);
     assertThat(spots)
-        .isEqualTo(List.of(new Spot(9, 9), new Spot(8, 9), new Spot(7, 9)));
+        .isEqualTo(List.of(Spot.occupied(9, 9), Spot.occupied(8, 9), Spot.occupied(7, 9)));
   }
 
   @Test
   void givenNumberAndDown_whenCreateSpots_thenOk() {
     List<Spot> spots = Board.spots("A1D", 3);
     assertThat(spots)
-        .isEqualTo(List.of(new Spot(0, 0), new Spot(1, 0), new Spot(2, 0)));
+        .isEqualTo(List.of(Spot.occupied(0, 0), Spot.occupied(1, 0), Spot.occupied(2, 0)));
   }
 
   @Test
