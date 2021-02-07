@@ -43,7 +43,9 @@ public abstract class PlayableGame<P extends Player> extends GenericGame {
 
   @Override
   protected boolean doInit() {
-    IntStream.range(0, this.maxPlayers).forEach(i -> newPlayer());
+    IntStream.range(0, this.maxPlayers)
+        .mapToObj(i -> newPlayer())
+        .forEach(System.out::println);
     this.players = List.copyOf(this.players); // Set immutable
     return true;
   }

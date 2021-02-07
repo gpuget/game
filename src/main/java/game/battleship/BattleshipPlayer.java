@@ -34,9 +34,8 @@ public class BattleshipPlayer extends Player {
 
   @Override
   public String toString() {
-    return "BattleshipPlayer{" +
-        "name=" + getName() + ", " +
-        "ships=" + board.getShips() +
-        '}';
+    StringBuilder sb = new StringBuilder("[" + getName() + "]").append('\n');
+    sb.append(board);
+    return sb.toString();
   }
 }

@@ -16,4 +16,9 @@ public enum ShipType {
   public int getSize() {
     return size;
   }
+
+  @Override
+  public String toString() {
+    return name() + '(' + this.size + ')';
+  }
 }

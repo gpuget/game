@@ -7,8 +7,8 @@ import java.util.stream.IntStream;
 
 public class Screen {
   private final int size;
-  private final Spot[][] spots;
   private final String colHeader;
+  private Spot[][] spots;
 
   public Screen(int size, Set<Ship> ships) {
     this.size = size;
@@ -16,6 +16,10 @@ public class Screen {
     this.colHeader = "  " + IntStream.range(0, this.size)
         .mapToObj(i -> "" + (i + 1))
         .collect(Collectors.joining(" "));
+  }
+
+  public void update(Set<Ship> ships) {
+    this.spots = fillSpots(ships);
   }
 
   private Spot[][] fillSpots(Set<Ship> ships) {

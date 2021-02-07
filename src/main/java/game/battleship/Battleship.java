@@ -29,9 +29,12 @@ public class Battleship extends PlayableGame<BattleshipPlayer> {
 
   private Board createBoard() {
     Board board = Board.empty();
+    System.out.println("Places your ships (ex: A1D)\n" + board);
     Arrays.stream(ShipType.values())
+        .peek(type -> System.out.print(type + ": "))
         .map(this::createShip)
-        .forEach(board::places);
+        .map(board::places)
+        .forEach(System.out::println);
     return board;
   }
 
