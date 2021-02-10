@@ -1,11 +1,12 @@
 package game;
 
+import game.tetris.Tetris;
 import java.util.function.Supplier;
 
 public enum GameFactory {
-  ;
+  TETRIS(Tetris::new);
 
-  public final Supplier<Game> gameSupplier;
+  private final Supplier<Game> gameSupplier;
 
   GameFactory(Supplier<Game> gameSupplier) {
     this.gameSupplier = gameSupplier;
